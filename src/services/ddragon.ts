@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 import { getCDNVersion } from "../plugins/CDNVersionPlugin";
-import type { Champion, SliderSkin } from "../types/ddragon";
+import type { Champion, Skin } from "../types/ddragon";
 import type { ApiPromise } from "../types/types";
 import { cdnClient } from "./axios";
 
@@ -42,7 +42,7 @@ export function fetchChampions(): () => ApiPromise<Champion[]> {
   };
 }
 
-export function fetchSkins(champion: string): () => ApiPromise<SliderSkin[]> {
+export function fetchSkins(champion: string): () => ApiPromise<Skin[]> {
   return async () => {
     try {
       const version = getCDNVersion();
@@ -52,7 +52,7 @@ export function fetchSkins(champion: string): () => ApiPromise<SliderSkin[]> {
         `${version}/data/en_US/champion/${champion}.json`,
       );
 
-      const skins: SliderSkin[] = response.data.data[champion].skins.map(
+      const skins: Skin[] = response.data.data[champion].skins.map(
         (skin: any) => ({
           id: skin.id,
           num: skin.num,
