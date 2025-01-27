@@ -1,0 +1,25 @@
+:root {
+  --color-background: #1f1f1f;
+  --color-input: #2c2c2c;
+  --color-primary: #bc2e30;
+  --color-accent: #c5aa70;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Merriweather Sans", serif;
+  font-optical-sizing: auto;
+  background-color: var(--color-background);
+  color: white;
+  overflow-x: hidden;
+  min-height: 100dvh;
+}
+
+#app {
+  height: 100%;
+}
+
