@@ -1,4 +1,4 @@
-import { reactive, watchEffect } from "vue";
+import { onMounted, onUnmounted, reactive } from "vue";
 
 export default function useDimensions() {
   const dimensions = reactive({
@@ -6,18 +6,15 @@ export default function useDimensions() {
     height: window.innerHeight,
   });
 
-  watchEffect((onCleanup) => {
-    const onResize = () => {
-      dimensions.width = window.innerWidth;
-      dimensions.height = window.innerHeight;
-    };
+  const onResize = () => {
+    dimensions.width = window.innerWidth;
+    dimensions.height = window.innerHeight;
+  };
 
-    window.addEventListener("resize", onResize);
+  const resizeOberver = new ResizeObserver(onResize);
 
-    onCleanup(() => {
-      window.removeEventListener("resize", onResize);
-    });
-  });
+  onMounted(() => resizeOberver.observe(document.body));
+  onUnmounted(() => resizeOberver.disconnect());
 
   return dimensions;
 }
