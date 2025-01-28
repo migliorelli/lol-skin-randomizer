@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { SpeedInsights } from "@vercel/speed-insights/vue";
 import Navbar from "./components/global/Navbar.vue";
 import VersionError from "./views/components/VersionError.vue";
 
@@ -9,6 +10,7 @@ const { version, loading } = useCDNVersion();
 </script>
 
 <template>
+  <SpeedInsights />
   <Navbar />
   <main>
     <VersionError v-if="!loading && !version" />
