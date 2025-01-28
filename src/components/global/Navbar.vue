@@ -29,7 +29,7 @@ onUnmounted(() => {
         <span>Randomizer</span>
       </RouterLink>
       <a
-        href="https://github.com/migliorelli"
+        href="https://github.com/migliorelli/lol-skin-randomizer"
         class="link icon"
         target="_blank"
       >
