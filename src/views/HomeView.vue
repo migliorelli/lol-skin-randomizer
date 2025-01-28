@@ -39,6 +39,7 @@ const pickRandom = () => {
           @click="pickRandom"
           :disabled="loading && !error"
           hover="lighten"
+          v-tooltip:bottom="'Pick random'"
           icon
         >
           <Dices />

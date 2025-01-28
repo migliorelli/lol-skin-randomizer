@@ -201,25 +201,27 @@ watch(isZoomed, (newValue) => {
             @click="toggleGrid(true)"
             :disabled="running || isGrid"
             hover="lighten"
+            v-tooltip:bottom="'Change to grid'"
+            icon
             :style="{
               borderTopRightRadius: 0,
               borderBottomRightRadius: 0,
               paddingLeft: '0.75rem',
             }"
-            icon
           >
             <LayoutGrid />
           </Button>
           <Button
             @click="toggleGrid(false)"
             :disabled="running || !isGrid"
+            v-tooltip:bottom="'Change to carousel'"
             hover="lighten"
+            icon
             :style="{
               borderTopLeftRadius: 0,
               borderBottomLeftRadius: 0,
               paddingRight: '0.75rem',
             }"
-            icon
           >
             <GalleryHorizontal />
           </Button>
@@ -228,6 +230,7 @@ watch(isZoomed, (newValue) => {
         <Button
           @click="enableAll"
           :disabled="running || disabledSkins.length === 0"
+          v-tooltip:bottom="'Reset selection'"
           hover="lighten"
           icon
         >
