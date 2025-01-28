@@ -23,3 +23,33 @@ body {
   height: 100%;
 }
 
+.tooltip {
+  position: absolute;
+  padding: 5px 10px;
+  font-weight: lighter;
+  font-size: 12px;
+  background-color: var(--color-input);
+  color: #fff;
+  border-radius: 15px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 200ms ease;
+  z-index: 1000;
+}
+
+.tooltip-top {
+  transform: translate(-50%, -100%);
+}
+
+.tooltip-bottom {
+  transform: translateX(-50%);
+}
+
+.tooltip-left {
+  transform: translate(-100%, -50%);
+}
+
+.tooltip-right {
+  transform: translateY(-50%);
+}
