@@ -136,10 +136,6 @@ const pickRandom = () => {
 }
 
 @media (max-width: 768px) {
-  .champion-grid {
-    grid-template-columns: 1fr;
-  }
-
   .hero {
     width: 100%;
     padding-inline: 2rem;
