@@ -84,7 +84,7 @@ img {
   font-family: "Noto Serif", serif;
   text-transform: uppercase;
   font-weight: 400;
-  font-size: xx-large;
+  font-size: x-large;
 }
 
 .title {
@@ -100,6 +100,14 @@ img {
 }
 
 @media (max-width: 1024px) {
+  .infos {
+    padding: 1rem;
+  }
+
+  .name {
+    font-size: large;
+  }
+
   .title {
     max-height: 100px;
     opacity: 1;

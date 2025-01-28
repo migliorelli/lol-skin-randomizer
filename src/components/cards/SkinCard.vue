@@ -241,12 +241,16 @@ const onZoomImage = () => {
   font-family: "Noto Serif", serif;
   text-transform: uppercase;
   font-weight: 400;
-  font-size: xx-large;
+  font-size: large;
 }
 
 @media (max-width: 1024px) {
   .item .zoom-btn {
     opacity: 1;
+  }
+
+  .item .infos {
+    padding: 1rem;
   }
 }
 </style>
