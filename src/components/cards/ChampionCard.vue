@@ -9,6 +9,7 @@ defineProps<Champion>();
     <div class="card-container">
       <img
         :src="`https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${id}_0.jpg`"
+        loading="lazy"
         :alt="`${id}'s splash art'`"
       />
       <div class="backdrop">

@@ -56,6 +56,7 @@ const onZoomImage = () => {
       <template v-if="isGrid">
         <img
           :src="`https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion}_${skin.num}.jpg`"
+          loading="lazy"
           :alt="`${skin.name} skin`"
           :id="`${champion}_${skin.num}`"
         />
@@ -74,6 +75,7 @@ const onZoomImage = () => {
           :src="`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion}_${skin.num}.jpg`"
           :alt="`${skin.name} skin`"
           :id="`${champion}_${skin.num}`"
+          loading="lazy"
         />
         <div class="name">{{ capitalize(skin.name) }}</div>
         <button class="zoom-btn" @click.stop="onZoomImage">
