@@ -39,6 +39,7 @@ const tooltip: Directive<HTMLElement, string, never, Positions> = {
 
     element.tooltipHandlers = {
       resizeObserver,
+      tooltip,
       mouseEnterHandler: () => {
         tooltip.style.opacity = "1";
         tooltip.style.visibility = "visible";
@@ -74,6 +75,7 @@ const tooltip: Directive<HTMLElement, string, never, Positions> = {
       );
 
       el.tooltipHandlers.resizeObserver.disconnect();
+      el.tooltipHandlers.tooltip.remove();
 
       delete el.tooltipHandlers;
     }
@@ -121,6 +123,7 @@ declare global {
   interface HTMLElement {
     tooltipHandlers?: {
       resizeObserver: ResizeObserver;
+      tooltip: HTMLElement;
       mouseEnterHandler: (event: MouseEvent) => void;
       mouseLeaveHandler: (event: MouseEvent) => void;
     };
