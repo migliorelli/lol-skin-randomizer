@@ -2,6 +2,10 @@
 
 This is a Vue 3 + TypeScript + Vite application designed to help you randomize skins in League of Legends.
 
+## Access
+
+[LoL Skin Randomizer](https://lol-skin-randomizer.vercel.app/)
+
 ## Features
 
 - Randomly generate skins for champions.
