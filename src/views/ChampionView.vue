@@ -151,8 +151,9 @@ const enableAll = () => {
 };
 
 const toggleGrid = (newValue: boolean) => {
-  isGrid.value = newValue;
+  if (newValue === isGrid.value) return;
 
+  isGrid.value = newValue;
   if (newValue) stopAutoRotate();
   else startAutoRotate();
 };
@@ -199,27 +200,31 @@ watch(isZoomed, (newValue) => {
         <div class="toggle-grid">
           <Button
             @click="toggleGrid(true)"
-            :disabled="running || isGrid"
+            :disabled="running"
             hover="lighten"
+            v-tooltip:bottom="'Change to grid'"
+            :class="{ unselected: !isGrid }"
+            icon
             :style="{
               borderTopRightRadius: 0,
               borderBottomRightRadius: 0,
               paddingLeft: '0.75rem',
             }"
-            icon
           >
             <LayoutGrid />
           </Button>
           <Button
             @click="toggleGrid(false)"
-            :disabled="running || !isGrid"
+            :disabled="running"
+            v-tooltip:bottom="'Change to carousel'"
+            :class="{ unselected: isGrid }"
             hover="lighten"
+            icon
             :style="{
               borderTopLeftRadius: 0,
               borderBottomLeftRadius: 0,
               paddingRight: '0.75rem',
             }"
-            icon
           >
             <GalleryHorizontal />
           </Button>
@@ -228,6 +233,7 @@ watch(isZoomed, (newValue) => {
         <Button
           @click="enableAll"
           :disabled="running || disabledSkins.length === 0"
+          v-tooltip:bottom="'Reset selection'"
           hover="lighten"
           icon
         >
@@ -430,6 +436,14 @@ watch(isZoomed, (newValue) => {
   display: grid;
   place-items: center;
   z-index: 25;
+}
+
+.unselected {
+  filter: brightness(0.5);
+}
+
+.unselected:hover {
+  filter: brightness(0.75) !important;
 }
 
 .v-enter-active,

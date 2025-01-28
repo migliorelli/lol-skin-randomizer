@@ -10,6 +10,10 @@ interface Props {
   type?: ButtonHTMLAttributes["type"];
   disabled?: boolean;
   style?: StyleValue;
+  class?:
+    | string
+    | Record<string, boolean>
+    | Array<string | Record<string, boolean>>;
   icon?: boolean;
   hover?: "lighten" | "darken" | "default";
 }
@@ -37,7 +41,7 @@ defineExpose({ button });
     :type="props.type"
     :disabled="props.disabled"
     :style="props.style"
-    :class="{ icon: props.icon, [hoverClass]: props.hover }"
+    :class="[{ icon: props.icon, [hoverClass]: props.hover }, props.class]"
     @click="onClick"
   >
     <slot />
@@ -90,7 +94,7 @@ button:not(:disabled).hover-darken:hover {
 }
 
 button:disabled {
-  filter: brightness(0.5) grayscale(0.5);
+  filter: brightness(0.5) grayscale(0.6);
   cursor: not-allowed;
 }
 </style>
