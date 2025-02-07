@@ -26,6 +26,7 @@ defineProps<Champion>();
 .champion-card {
   border-radius: 20px;
   border: transparent 4px solid;
+  aspect-ratio: 9/16;
   padding: 10px;
   transition: border 200ms;
   color: white;
