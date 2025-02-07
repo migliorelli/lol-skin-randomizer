@@ -1,22 +1,28 @@
 <script setup lang="ts">
+import { Analytics } from "@vercel/analytics/vue";
 import { SpeedInsights } from "@vercel/speed-insights/vue";
-import Navbar from "./components/global/Navbar.vue";
-import VersionError from "./views/components/VersionError.vue";
-
 import BackToTop from "./components/global/BackToTop.vue";
+import Navbar from "./components/global/Navbar.vue";
 import { useCDNVersion } from "./plugins/CDNVersionPlugin";
+import VersionError from "./views/components/VersionError.vue";
 
 const { version, loading } = useCDNVersion();
 </script>
 
 <template>
+  <!-- vercel -->
+  <Analytics />
   <SpeedInsights />
+  <!-- vercel -->
+
+  <!-- app -->
   <Navbar />
   <main>
     <VersionError v-if="!loading && !version" />
     <RouterView v-if="!loading && version" />
   </main>
   <BackToTop />
+  <!-- app -->
 </template>
 
 <style scoped>
