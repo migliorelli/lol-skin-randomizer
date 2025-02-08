@@ -1,11 +1,32 @@
 <script setup lang="ts">
+import { Star } from "lucide-vue-next";
+import { useRouter } from "vue-router";
 import type { Champion } from "../../types/ddragon";
 
-defineProps<Champion>();
+const router = useRouter();
+
+interface Props extends Champion {
+  favorite: boolean;
+}
+
+interface Emits {
+  (event: "favorite"): void;
+}
+
+const props = defineProps<Props>();
+const emit = defineEmits<Emits>();
+
+const onFavorite = () => {
+  emit("favorite");
+};
+
+const onClick = () => {
+  router.push(props.id);
+};
 </script>
 
 <template>
-  <RouterLink :to="{ name: 'champion', params: { id } }" class="champion-card">
+  <div role="button" @click="onClick" class="champion-card">
     <div class="card-container">
       <img
         :src="`https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${id}_0.jpg`"
@@ -18,8 +39,16 @@ defineProps<Champion>();
           <span class="title">{{ title }}</span>
         </div>
       </div>
+
+      <button :class="['fav-btn', { favorite }]" @click.stop="onFavorite">
+        <Star
+          :size="32"
+          :color="favorite ? '#fff085' : undefined"
+          :fill="favorite ? '#fff085' : '#00000000'"
+        />
+      </button>
     </div>
-  </RouterLink>
+  </div>
 </template>
 
 <style scoped>
@@ -31,6 +60,8 @@ defineProps<Champion>();
   transition: border 200ms;
   color: white;
   user-select: none;
+  position: relative;
+  cursor: pointer;
 }
 
 .champion-card:hover {
@@ -100,6 +131,35 @@ img {
   opacity: 1;
 }
 
+.champion-card .fav-btn {
+  opacity: 0;
+  transition: opacity 200ms linear;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  color: white;
+  z-index: 10;
+  aspect-ratio: 1/1;
+  display: grid;
+  place-items: center;
+}
+
+.champion-card:hover .fav-btn {
+  opacity: 1;
+}
+
+.champion-card .fav-btn:focus {
+  opacity: 1;
+}
+
+.fav-btn.favorite {
+  opacity: 1;
+}
+
 @media (max-width: 1024px) {
   .infos {
     padding: 1rem;
@@ -111,6 +171,10 @@ img {
 
   .title {
     max-height: 100px;
+    opacity: 1;
+  }
+
+  .champion-card .fav-btn {
     opacity: 1;
   }
 }

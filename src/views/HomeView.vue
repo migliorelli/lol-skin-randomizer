@@ -6,6 +6,7 @@ import ChampionCard from "../components/cards/ChampionCard.vue";
 import Button from "../components/ui/Button.vue";
 import Input from "../components/ui/Input.vue";
 import useAsync from "../composables/useAsync";
+import usePersistentRef from "../composables/usePersistentRef";
 import { fetchChampions } from "../services/ddragon";
 import type { Champion } from "../types/ddragon";
 
@@ -13,13 +14,20 @@ const { data, error, loading } = useAsync<Champion[]>(fetchChampions());
 const search = ref("");
 const router = useRouter();
 
-const champions = computed(() =>
-  data.value
-    ? data.value.filter((champion) =>
-        champion.id.toUpperCase().includes(search.value.toUpperCase()),
-      )
-    : [],
-);
+const favorites = usePersistentRef<string[]>(`favorites`, []);
+const champions = computed(() => {
+  if (!data.value) return [];
+
+  return data.value
+    .filter((champ) =>
+      champ.id.toUpperCase().includes(search.value.toUpperCase()),
+    )
+    .sort((a, b) => {
+      const aFav = checkFavorite(a.id);
+      const bFav = checkFavorite(b.id);
+      return Number(bFav) - Number(aFav);
+    });
+});
 
 const pickRandom = () => {
   if (!data.value) return;
@@ -27,6 +35,23 @@ const pickRandom = () => {
   const randomChampion =
     data.value[Math.floor(Math.random() * data.value.length)];
   router.push(`/${randomChampion.id}`);
+};
+
+const handleFavorite = (id: string) => {
+  const favoritesSet = new Set(favorites.value);
+
+  if (favoritesSet.has(id)) {
+    favoritesSet.delete(id);
+  } else {
+    favoritesSet.add(id);
+  }
+
+  favorites.value = Array.from(favoritesSet);
+};
+
+const checkFavorite = (id: string) => {
+  const favoritesSet = new Set(favorites.value);
+  return favoritesSet.has(id);
 };
 </script>
 
@@ -61,6 +86,8 @@ const pickRandom = () => {
           v-for="champion in champions"
           :key="champion.id"
           v-bind="champion"
+          :favorite="checkFavorite(champion.id)"
+          @favorite="handleFavorite(champion.id)"
         />
       </div>
     </Transition>
