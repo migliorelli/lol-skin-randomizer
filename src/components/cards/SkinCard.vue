@@ -94,7 +94,6 @@ const onZoomImage = () => {
   cursor: pointer;
   border-radius: 20px;
   border: transparent 4px solid;
-  aspect-ratio: 9/16;
 
   transition: all linear 200ms;
   transform: rotateY(
@@ -210,6 +209,7 @@ const onZoomImage = () => {
   transform: none;
   border-width: 4px;
   padding: 10px;
+  aspect-ratio: 9/16;
 }
 
 .item.grid .zoom-btn {
