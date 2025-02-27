@@ -20,7 +20,7 @@ interface Emits {
 const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
 
-const onInput = (event: Event) => {
+const handleInput = (event: Event) => {
   emit("update:modelValue", (event.target as HTMLInputElement).value);
 };
 
@@ -36,7 +36,7 @@ const inputAttrs = computed(() => {
 
 <template>
   <div :class="divClass">
-    <input v-bind="inputAttrs" :value="modelValue" @input="onInput" />
+    <input v-bind="inputAttrs" :value="modelValue" @input="handleInput" />
     <button
       class="clear-button"
       :disabled="disabled"
