@@ -4,7 +4,7 @@ This is a Vue 3 + TypeScript + Vite application designed to help you randomize s
 
 ## Access
 
-[LoL Skin Randomizer](https://lol-skin-randomizer.vercel.app/)
+[LoL Skin Randomizer](https://lolrandomizer.migliorelli.dev/)
 
 ## Features
 
