@@ -13,7 +13,6 @@ export function fetchChampions(): () => ApiPromise<Champion[]> {
       const response = await cdnClient.get(
         `${version}/data/en_US/champion.json`,
       );
-      console.log(response);
       const champions: Champion[] = Object.values(response.data.data).map(
         (champion: any) => ({
           id: champion.id,

@@ -117,7 +117,6 @@ const toggleDisableSkin = (num: number) => {
 
   const enabledSkins = skins.value.length - disabledSkins.value.length;
   const isDisabled = disabledSkins.value.find((skin) => skin === num);
-  console.log(num, enabledSkins, isDisabled);
 
   if (enabledSkins <= 1 && isDisabled === undefined) {
     return;
