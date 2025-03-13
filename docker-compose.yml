@@ -1,0 +1,18 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: miguelmib/lolrandom:latest
+    container_name: lolrandom
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "3001:80"
+    networks:
+      - web
+
+networks:
+  web:
+    driver: bridge
