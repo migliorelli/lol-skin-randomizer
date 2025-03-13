@@ -1,0 +1,46 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - deploy
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Log in to Docker Hub 🔐
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push to Docker Hub 🔐
+        uses: docker/build-push-action@v5
+        with:
+          tags: ${{ secrets.DOCKERHUB_TAG }}
+          no-cache: true
+          push: true
+
+      - name: Deploy to VPS 🚀
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ${{ secrets.PROJECT_DIR }}
+            git pull origin deploy
+
+            docker compose down
+            docker compose pull
+            docker compose up -d
+            docker cp ${{ secrets.CONTAINER_NAME }}:/app/robots.txt ${{ secrets.ROBOTS_PATH }}
