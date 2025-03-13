@@ -10,20 +10,20 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@vercel/analytics": "^1.4.1",
-    "@vercel/speed-insights": "^1.1.0",
     "axios": "^1.7.9",
     "lucide-vue-next": "^0.473.0",
-    "prettier": "^3.4.2",
-    "prettier-plugin-organize-imports": "^4.1.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/tsconfig": "^0.7.0",
+    "prettier": "^3.5.3",
+    "prettier-plugin-organize-imports": "^4.1.0",
+    "terser": "^5.39.0",
     "typescript": "~5.6.2",
     "vite": "^6.0.5",
+    "vite-plugin-sitemap": "^0.7.1",
     "vue-tsc": "^2.2.0"
   }
 }
