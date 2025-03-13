@@ -3,6 +3,9 @@ concurrency: production
 
 on:
   push:
+    paths-ignore:
+      - "*.md"
+      - "LICENSE"
     branches:
       - deploy
 
