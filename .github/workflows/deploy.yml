@@ -1,4 +1,5 @@
 name: Deployment
+concurrency: production
 
 on:
   push:
