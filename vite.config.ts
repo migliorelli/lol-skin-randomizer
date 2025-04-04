@@ -12,24 +12,24 @@ export default defineConfig({
     }),
   ],
   server: {
-    port: 3000,
-    strictPort: true,
-    host: true,
-    watch: {
-      usePolling: true,
-    },
+    port: (process.env.PORT as unknown as number) || 3000,
+    // strictPort: true,
+    // host: true,
+    // watch: {
+    //   usePolling: true,
+    // },
   },
-  build: {
-    outDir: "dist",
-    assetsDir: "assets",
-    emptyOutDir: true,
-    sourcemap: false,
-    minify: "terser",
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-    },
-  },
+  // build: {
+  //   outDir: "dist",
+  //   assetsDir: "assets",
+  //   emptyOutDir: true,
+  //   sourcemap: false,
+  //   minify: "terser",
+  //   terserOptions: {
+  //     compress: {
+  //       drop_console: true,
+  //       drop_debugger: true,
+  //     },
+  //   },
+  // },
 });
